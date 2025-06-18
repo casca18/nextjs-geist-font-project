@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create New Personnel{% endblock %}
+
+{% block body %}
+<h1>Create New Personnel</h1>
+
+<form method="post" action="{{ path('personnel_new') }}">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="role">Role:</label>
+    <input type="text" id="role" name="role" required>
+
+    <label for="responsibility">Responsibility:</label>
+    <input type="text" id="responsibility" name="responsibility">
+
+    <label for="isPresent">Present:</label>
+    <input type="checkbox" id="isPresent" name="isPresent" value="1">
+
+    <button type="submit">Create</button>
+</form>
+
+<a href="{{ path('personnel_index') }}">Back to list</a>
+{% endblock %}
