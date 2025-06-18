@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Consultations List{% endblock %}
+
+{% block body %}
+<h1>Consultations List</h1>
+
+<a href="{{ path('consultation_new') }}">Create new Consultation</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Doctor</th>
+            <th>Consultation Date</th>
+            <th>Consultation Count</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for consultation in consultations %}
+        <tr>
+            <td>{{ consultation.doctor.name }}</td>
+            <td>{{ consultation.consultationDate|date('Y-m-d H:i') }}</td>
+            <td>{{ consultation.consultationCount }}</td>
+            <td>
+                <a href="{{ path('consultation_show', {'id': consultation.id}) }}">show</a>
+                <a href="{{ path('consultation_edit', {'id': consultation.id}) }}">edit</a>
+                <form method="post" action="{{ path('consultation_delete', {'id': consultation.id}) }}" style="display:inline-block" onsubmit="return confirm('Are you sure?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ consultation.id) }}">
+                    <button type="submit">delete</button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="4">No consultations found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
