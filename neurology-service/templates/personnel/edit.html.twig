@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Personnel{% endblock %}
+
+{% block body %}
+<h1>Edit Personnel</h1>
+
+<form method="post" action="{{ path('personnel_edit', {'id': personnel.id}) }}">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="{{ personnel.name }}" required>
+
+    <label for="role">Role:</label>
+    <input type="text" id="role" name="role" value="{{ personnel.role }}" required>
+
+    <label for="responsibility">Responsibility:</label>
+    <input type="text" id="responsibility" name="responsibility" value="{{ personnel.responsibility }}">
+
+    <label for="isPresent">Present:</label>
+    <input type="checkbox" id="isPresent" name="isPresent" value="1" {% if personnel.isPresent %}checked{% endif %}>
+
+    <button type="submit">Update</button>
+</form>
+
+<a href="{{ path('personnel_index') }}">Back to list</a>
+{% endblock %}
