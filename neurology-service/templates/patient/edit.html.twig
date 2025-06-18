@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Patient{% endblock %}
+
+{% block body %}
+<h1>Edit Patient</h1>
+
+<form method="post" action="{{ path('patient_edit', {'id': patient.id}) }}">
+    <label for="dossierNumber">Dossier Number:</label>
+    <input type="text" id="dossierNumber" name="dossierNumber" value="{{ patient.dossierNumber }}" required>
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="{{ patient.name }}" required>
+
+    <label for="sociodemographicInfo">Sociodemographic Info:</label>
+    <textarea id="sociodemographicInfo" name="sociodemographicInfo">{{ patient.sociodemographicInfo }}</textarea>
+
+    <label for="clinicalInfo">Clinical Info:</label>
+    <textarea id="clinicalInfo" name="clinicalInfo">{{ patient.clinicalInfo }}</textarea>
+
+    <label for="paraclinicalInfo">Paraclinical Info:</label>
+    <textarea id="paraclinicalInfo" name="paraclinicalInfo">{{ patient.paraclinicalInfo }}</textarea>
+
+    <label for="therapeuticInfo">Therapeutic Info:</label>
+    <textarea id="therapeuticInfo" name="therapeuticInfo">{{ patient.therapeuticInfo }}</textarea>
+
+    <label for="prognosticInfo">Prognostic Info:</label>
+    <textarea id="prognosticInfo" name="prognosticInfo">{{ patient.prognosticInfo }}</textarea>
+
+    <button type="submit">Update</button>
+</form>
+
+<a href="{{ path('patient_index') }}">Back to list</a>
+{% endblock %}
