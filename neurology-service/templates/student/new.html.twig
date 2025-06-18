@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create New Student{% endblock %}
+
+{% block body %}
+<h1>Create New Student</h1>
+
+<form method="post" action="{{ path('student_new') }}">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="type">Type:</label>
+    <input type="text" id="type" name="type" placeholder="Intern or Thesis" required>
+
+    <label for="researchSubject">Research Subject:</label>
+    <input type="text" id="researchSubject" name="researchSubject">
+
+    <label for="internshipPeriod">Internship Period:</label>
+    <input type="text" id="internshipPeriod" name="internshipPeriod" required>
+
+    <button type="submit">Create</button>
+</form>
+
+<a href="{{ path('student_index') }}">Back to list</a>
+{% endblock %}
