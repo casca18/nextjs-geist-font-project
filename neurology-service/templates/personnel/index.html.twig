@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personnel List{% endblock %}
+
+{% block body %}
+<h1>Personnel List</h1>
+
+<a href="{{ path('personnel_new') }}">Create new Personnel</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Responsibility</th>
+            <th>Present</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for personnel in personnels %}
+        <tr>
+            <td>{{ personnel.name }}</td>
+            <td>{{ personnel.role }}</td>
+            <td>{{ personnel.responsibility }}</td>
+            <td>{{ personnel.isPresent ? 'Yes' : 'No' }}</td>
+            <td>
+                <a href="{{ path('personnel_show', {'id': personnel.id}) }}">show</a>
+                <a href="{{ path('personnel_edit', {'id': personnel.id}) }}">edit</a>
+                <form method="post" action="{{ path('personnel_delete', {'id': personnel.id}) }}" style="display:inline-block" onsubmit="return confirm('Are you sure?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ personnel.id) }}">
+                    <button type="submit">delete</button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="5">No personnel found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
