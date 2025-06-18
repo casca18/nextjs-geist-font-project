@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Patients List{% endblock %}
+
+{% block body %}
+<h1>Patients List</h1>
+
+<a href="{{ path('patient_new') }}">Create new Patient</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Dossier Number</th>
+            <th>Name</th>
+            <th>Sociodemographic Info</th>
+            <th>Clinical Info</th>
+            <th>Paraclinical Info</th>
+            <th>Therapeutic Info</th>
+            <th>Prognostic Info</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for patient in patients %}
+        <tr>
+            <td>{{ patient.dossierNumber }}</td>
+            <td>{{ patient.name }}</td>
+            <td>{{ patient.sociodemographicInfo }}</td>
+            <td>{{ patient.clinicalInfo }}</td>
+            <td>{{ patient.paraclinicalInfo }}</td>
+            <td>{{ patient.therapeuticInfo }}</td>
+            <td>{{ patient.prognosticInfo }}</td>
+            <td>
+                <a href="{{ path('patient_show', {'id': patient.id}) }}">show</a>
+                <a href="{{ path('patient_edit', {'id': patient.id}) }}">edit</a>
+                <form method="post" action="{{ path('patient_delete', {'id': patient.id}) }}" style="display:inline-block" onsubmit="return confirm('Are you sure?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ patient.id) }}">
+                    <button type="submit">delete</button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="8">No patients found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
