@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create New Course Program{% endblock %}
+
+{% block body %}
+<h1>Create New Course Program</h1>
+
+<form method="post" action="{{ path('course_program_new') }}">
+    <label for="courseType">Course Type:</label>
+    <input type="text" id="courseType" name="courseType" placeholder="DES, EPU, Sémiologie" required>
+
+    <label for="month">Month:</label>
+    <input type="text" id="month" name="month" placeholder="e.g. 2024-06" required>
+
+    <label for="dateTime">Date & Time:</label>
+    <input type="datetime-local" id="dateTime" name="dateTime" required>
+
+    <label for="presenter">Presenter:</label>
+    <input type="text" id="presenter" name="presenter" required>
+
+    <button type="submit">Create</button>
+</form>
+
+<a href="{{ path('course_program_index') }}">Back to list</a>
+{% endblock %}
