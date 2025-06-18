@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Student{% endblock %}
+
+{% block body %}
+<h1>Edit Student</h1>
+
+<form method="post" action="{{ path('student_edit', {'id': student.id}) }}">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="{{ student.name }}" required>
+
+    <label for="type">Type:</label>
+    <input type="text" id="type" name="type" value="{{ student.type }}" required>
+
+    <label for="researchSubject">Research Subject:</label>
+    <input type="text" id="researchSubject" name="researchSubject" value="{{ student.researchSubject }}">
+
+    <label for="internshipPeriod">Internship Period:</label>
+    <input type="text" id="internshipPeriod" name="internshipPeriod" value="{{ student.internshipPeriod }}" required>
+
+    <button type="submit">Update</button>
+</form>
+
+<a href="{{ path('student_index') }}">Back to list</a>
+{% endblock %}
