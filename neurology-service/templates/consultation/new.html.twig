@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create New Consultation{% endblock %}
+
+{% block body %}
+<h1>Create New Consultation</h1>
+
+<form method="post" action="{{ path('consultation_new') }}">
+    <label for="doctor">Doctor:</label>
+    <select id="doctor" name="doctor" required>
+        {% for doctor in doctors %}
+            <option value="{{ doctor.id }}">{{ doctor.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="consultationDate">Consultation Date:</label>
+    <input type="datetime-local" id="consultationDate" name="consultationDate" required>
+
+    <label for="consultationCount">Consultation Count:</label>
+    <input type="number" id="consultationCount" name="consultationCount" min="0" required>
+
+    <button type="submit">Create</button>
+</form>
+
+<a href="{{ path('consultation_index') }}">Back to list</a>
+{% endblock %}
