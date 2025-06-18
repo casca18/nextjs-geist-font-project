@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Students List{% endblock %}
+
+{% block body %}
+<h1>Students List</h1>
+
+<a href="{{ path('student_new') }}">Create new Student</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Research Subject</th>
+            <th>Internship Period</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for student in students %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.type }}</td>
+            <td>{{ student.researchSubject }}</td>
+            <td>{{ student.internshipPeriod }}</td>
+            <td>
+                <a href="{{ path('student_show', {'id': student.id}) }}">show</a>
+                <a href="{{ path('student_edit', {'id': student.id}) }}">edit</a>
+                <form method="post" action="{{ path('student_delete', {'id': student.id}) }}" style="display:inline-block" onsubmit="return confirm('Are you sure?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ student.id) }}">
+                    <button type="submit">delete</button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="5">No students found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
