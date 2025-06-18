@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Duty Schedule{% endblock %}
+
+{% block body %}
+<h1>Edit Duty Schedule</h1>
+
+<form method="post" action="{{ path('duty_schedule_edit', {'id': duty_schedule.id}) }}">
+    <label for="personnel">Personnel:</label>
+    <select id="personnel" name="personnel" required>
+        {% for personnel in personnels %}
+            <option value="{{ personnel.id }}" {% if personnel.id == duty_schedule.personnel.id %}selected{% endif %}>{{ personnel.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="month">Month:</label>
+    <input type="text" id="month" name="month" value="{{ duty_schedule.month }}" required>
+
+    <label for="dutyDetails">Duty Details:</label>
+    <textarea id="dutyDetails" name="dutyDetails" required>{{ duty_schedule.dutyDetails }}</textarea>
+
+    <button type="submit">Update</button>
+</form>
+
+<a href="{{ path('duty_schedule_index') }}">Back to list</a>
+{% endblock %}
