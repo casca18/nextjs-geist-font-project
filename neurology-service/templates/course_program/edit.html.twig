@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Course Program{% endblock %}
+
+{% block body %}
+<h1>Edit Course Program</h1>
+
+<form method="post" action="{{ path('course_program_edit', {'id': course_program.id}) }}">
+    <label for="courseType">Course Type:</label>
+    <input type="text" id="courseType" name="courseType" value="{{ course_program.courseType }}" required>
+
+    <label for="month">Month:</label>
+    <input type="text" id="month" name="month" value="{{ course_program.month }}" required>
+
+    <label for="dateTime">Date & Time:</label>
+    <input type="datetime-local" id="dateTime" name="dateTime" value="{{ course_program.dateTime|date('Y-m-d\\TH:i') }}" required>
+
+    <label for="presenter">Presenter:</label>
+    <input type="text" id="presenter" name="presenter" value="{{ course_program.presenter }}" required>
+
+    <button type="submit">Update</button>
+</form>
+
+<a href="{{ path('course_program_index') }}">Back to list</a>
+{% endblock %}
