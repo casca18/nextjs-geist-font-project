@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Course Programs List{% endblock %}
+
+{% block body %}
+<h1>Course Programs List</h1>
+
+<a href="{{ path('course_program_new') }}">Create new Course Program</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Course Type</th>
+            <th>Month</th>
+            <th>Date & Time</th>
+            <th>Presenter</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for course_program in course_programs %}
+        <tr>
+            <td>{{ course_program.courseType }}</td>
+            <td>{{ course_program.month }}</td>
+            <td>{{ course_program.dateTime|date('Y-m-d H:i') }}</td>
+            <td>{{ course_program.presenter }}</td>
+            <td>
+                <a href="{{ path('course_program_show', {'id': course_program.id}) }}">show</a>
+                <a href="{{ path('course_program_edit', {'id': course_program.id}) }}">edit</a>
+                <form method="post" action="{{ path('course_program_delete', {'id': course_program.id}) }}" style="display:inline-block" onsubmit="return confirm('Are you sure?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ course_program.id) }}">
+                    <button type="submit">delete</button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="5">No course programs found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
