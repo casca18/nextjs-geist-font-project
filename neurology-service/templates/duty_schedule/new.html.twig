@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create New Duty Schedule{% endblock %}
+
+{% block body %}
+<h1>Create New Duty Schedule</h1>
+
+<form method="post" action="{{ path('duty_schedule_new') }}">
+    <label for="personnel">Personnel:</label>
+    <select id="personnel" name="personnel" required>
+        {% for personnel in personnels %}
+            <option value="{{ personnel.id }}">{{ personnel.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="month">Month:</label>
+    <input type="text" id="month" name="month" placeholder="e.g. 2024-06" required>
+
+    <label for="dutyDetails">Duty Details:</label>
+    <textarea id="dutyDetails" name="dutyDetails" required></textarea>
+
+    <button type="submit">Create</button>
+</form>
+
+<a href="{{ path('duty_schedule_index') }}">Back to list</a>
+{% endblock %}
