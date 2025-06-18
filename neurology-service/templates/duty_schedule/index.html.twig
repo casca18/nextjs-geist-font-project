@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Duty Schedules List{% endblock %}
+
+{% block body %}
+<h1>Duty Schedules List</h1>
+
+<a href="{{ path('duty_schedule_new') }}">Create new Duty Schedule</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Personnel</th>
+            <th>Month</th>
+            <th>Duty Details</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for duty_schedule in duty_schedules %}
+        <tr>
+            <td>{{ duty_schedule.personnel.name }}</td>
+            <td>{{ duty_schedule.month }}</td>
+            <td>{{ duty_schedule.dutyDetails }}</td>
+            <td>
+                <a href="{{ path('duty_schedule_show', {'id': duty_schedule.id}) }}">show</a>
+                <a href="{{ path('duty_schedule_edit', {'id': duty_schedule.id}) }}">edit</a>
+                <form method="post" action="{{ path('duty_schedule_delete', {'id': duty_schedule.id}) }}" style="display:inline-block" onsubmit="return confirm('Are you sure?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ duty_schedule.id) }}">
+                    <button type="submit">delete</button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="4">No duty schedules found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
