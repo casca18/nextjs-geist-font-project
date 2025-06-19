@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Neurology Service{% endblock %}</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50">
+    <!-- Navigation -->
+    <header class="bg-white shadow-sm">
+        <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 justify-between items-center">
+                <div class="flex">
+                    <a href="{{ path('home') }}" class="flex items-center">
+                        <span class="text-xl font-bold text-gray-900">Neurology Service</span>
+                    </a>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="flex items-center sm:hidden">
+                    <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Desktop menu -->
+                <div class="hidden sm:flex sm:space-x-8">
+                    <a href="{{ path('personnel_index') }}" class="text-gray-900 hover:text-gray-500 px-3 py-2 text-sm font-medium">Personnel</a>
+                    <a href="{{ path('user_index') }}" class="text-gray-900 hover:text-gray-500 px-3 py-2 text-sm font-medium">Users</a>
+                    <a href="{{ path('consultation_index') }}" class="text-gray-900 hover:text-gray-500 px-3 py-2 text-sm font-medium">Consultations</a>
+                    <a href="{{ path('patient_index') }}" class="text-gray-900 hover:text-gray-500 px-3 py-2 text-sm font-medium">Patients</a>
+                    <a href="{{ path('duty_schedule_index') }}" class="text-gray-900 hover:text-gray-500 px-3 py-2 text-sm font-medium">Duty Schedules</a>
+                    <a href="{{ path('course_program_index') }}" class="text-gray-900 hover:text-gray-500 px-3 py-2 text-sm font-medium">Course Programs</a>
+                    <a href="{{ path('student_index') }}" class="text-gray-900 hover:text-gray-500 px-3 py-2 text-sm font-medium">Students</a>
+                </div>
+            </div>
+
+            <!-- Mobile menu -->
+            <div class="sm:hidden hidden" id="mobile-menu">
+                <div class="space-y-1 pt-2 pb-3">
+                    <a href="{{ path('personnel_index') }}" class="block px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50">Personnel</a>
+                    <a href="{{ path('user_index') }}" class="block px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50">Users</a>
+                    <a href="{{ path('consultation_index') }}" class="block px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50">Consultations</a>
+                    <a href="{{ path('patient_index') }}" class="block px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50">Patients</a>
+                    <a href="{{ path('duty_schedule_index') }}" class="block px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50">Duty Schedules</a>
+                    <a href="{{ path('course_program_index') }}" class="block px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50">Course Programs</a>
+                    <a href="{{ path('student_index') }}" class="block px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50">Students</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white mt-auto">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-sm text-gray-500">&copy; {{ "now"|date("Y") }} Neurology Service. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for mobile menu toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const button = document.querySelector('.mobile-menu-button');
+            const menu = document.querySelector('#mobile-menu');
+            
+            button.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
